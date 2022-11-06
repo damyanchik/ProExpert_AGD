@@ -1,0 +1,17 @@
+@font-face {
+    font-family: "12";
+    src: url("../fonts/BebasNeue-Regular.woff");
+    src: url("../fonts/BebasNeue-Regular.woff2");
+}
+
+@font-face {
+    font-family: "13";
+    src: url("../fonts/AlfaSlabOne-Regular.woff");
+    src: url("../fonts/AlfaSlabOne-Regular.woff2");
+}
+
+@font-face {
+    font-family: "14";
+    src: url("../fonts/Sora-Regular.woff");
+    src: url("../fonts/Sora-Regular.woff2");
+}

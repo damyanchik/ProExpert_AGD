@@ -1,0 +1,277 @@
+@import 'font.css';
+
+/* MAIN */
+
+.background, .navigation {
+    background-color: #F2F1E9;
+    cursor: default;
+}
+
+.font-fam-12 {
+    font-family: '12', Arial, sans-serif;
+}
+
+.font-fam-13 {
+    font-family: '13', Arial, sans-serif;
+}
+
+.font-fam-14 {
+    font-family: '14', Tahoma, sans-serif;
+}
+
+.font-color-db {
+    color: #2C2D40 !important;
+}
+
+.logo {
+    background-image: url("../images/logo.png");
+    background-size: cover;
+    width: 19em;
+    height: 4rem;
+}
+
+.phone {
+    width: 1.5rem;
+}
+
+.nav-button-active {
+    text-decoration: underline 2px #2C2D40 !important;
+}
+
+.nav-button:hover {
+    text-decoration: underline 2px #2C2D40 !important;
+}
+
+.l-win {
+    width: 20rem !important;
+}
+
+/* HOME TEMPLATE */
+
+.red-button {
+    text-decoration: none;
+    font-family: '12', Arial, sans-serif;
+    color: #F2F1E9;
+    border: solid 1px;
+    border-radius: 15px;
+    background: #A6524B;
+    background: linear-gradient(to left, #A6524B 50%, #F2F1E9 50%) right;
+    background-size: 300%;
+    transition: .3s ease-out;
+}
+
+.red-button:hover {
+    background-position: left;
+    border: solid 1px;
+    color: #A6524B;
+    border-radius: 15px;
+    border: solid #A6524B;
+    background-color: #F2F1E9;
+}
+
+.red-button::after {
+    content: '';
+    width: 30px; height: 30px;
+    border-radius: 100%;
+    border: 3px solid #A6524B;
+    position: absolute;
+    z-index: -1;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    animation: ring 2.5s infinite;
+}
+
+.red-button:hover::after, .red-button:focus::after {
+    animation: none;
+    display: none;
+}
+
+@keyframes ring {
+    0% {
+        width: 30px;
+        height: 30px;
+        opacity: 1;
+    }
+
+    100% {
+        width: 300px;
+        height: 300px;
+        opacity: 0;
+    }
+}
+
+.householdgoods {
+    text-align: center;
+}
+
+.householdgoods img {
+    width: 8rem;
+    height: auto;
+}
+
+.householdgoods figcaption {
+    margin-top: 0.5rem;
+}
+
+.home-list li {
+    list-style: circle;
+    margin-top: 1.5rem;
+    margin-left: 1.8rem;
+    line-height: 1.9rem;
+}
+
+.text-correction {
+    line-height: 2.1rem !important;
+}
+
+.fixly-link {
+    color: #2C2D40 !important;
+}
+
+/* COVERAGE TEMPLATE */
+
+.googlemap {
+    width: 100%;
+}
+
+/* CONTACT TEMPLATE */
+
+.contact-details li {
+    list-style: none;
+    line-height: 1.8rem;
+}
+
+/* PANEL TEMPLATE */
+
+.nav-pills>li>a{
+    color: #2C2D40 !important;
+    font-family: '12', Arial, sans-serif;
+    font-size: 20px;
+}
+
+.nav-pills>li>a.active,
+.nav-pills>li>a:hover,
+.nav-pills>li>a:focus {
+    background-color: #2C2D40 !important;
+    color: #F2F1E9 !important;
+    font-family: '12', Arial, sans-serif;
+    font-size: 20px;
+}
+
+/* OTHER */
+
+.account-centr {
+    margin: 0 auto !important;
+    width: 20rem !important;
+}
+
+.panel-button {
+    border: #2C2D40 solid !important;
+    border-radius: 15px !important;
+}
+
+.site-button {
+    background: #2C2D40 !important;
+    color: #F2F1E9 !important;
+    font-size: 18px !important;
+    border: #2C2D40 solid !important;
+    border-radius: 10px !important;
+    padding: 0.2rem !important;
+    font-family: '12', Arial, sans-serif !important;
+}
+
+.site-button:hover {
+    background: #F2F1E9 !important;
+    color: #2C2D40 !important;
+}
+
+.contact-footer {
+    list-style: none;
+    line-height: 1.7rem;
+    font-size: 13px;
+}
+
+.nav-footer {
+    color: rgba(0,0,0,.5);
+}
+
+.nav-footer:hover {
+    color: #2C2D40;
+}
+
+.copyright {
+    font-size: 12px !important;
+}
+
+.page-animation {
+    animation: transitionIn .50s;
+}
+
+@keyframes transitionIn {
+    from {
+        opacity: 0;
+        transform: translateY(-5deg);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@media (max-width: 1118px) {
+    .nav-number {
+        display: none !important;
+    }
+}
+
+@media (max-width: 540px) {
+    .logo {
+        width: 15rem;
+        height: 2.5rem;
+    }
+
+    .red-button {
+        font-size: 30px !important;
+    }
+
+    @keyframes ring {
+        100% {
+            width: 200px;
+            height: 200px;
+            opacity: 0;
+        }
+    }
+
+    .title-size {
+        font-size: 45px !important;
+    }
+
+    .subtitle-size {
+        font-size: 21px !important;
+        line-height: 2rem !important;
+    }
+
+    .description-size {
+        font-size: 15px !important;
+    }
+
+    .householdgoods img {
+        width: 5rem;
+    }
+
+    .home-list li {
+        list-style: circle;
+
+        line-height: 1.9rem;
+    }
+
+    .contact-footer {
+        font-size: 13px !important;
+    }
+
+    .copyright {
+        font-size: 8px !important;
+    }
+}
