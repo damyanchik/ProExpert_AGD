@@ -1,8 +1,8 @@
 <?php
 
-$db = [
+return $db = [
     'host' => 'localhost',
-    'database' => 'agd_test',
+    'database' => 'agd_proexpert',
     'user' => 'root',
     'password' => ''
 ];

@@ -6,22 +6,23 @@ namespace App\Src;
 
 use PDO;
 
-final class Database
+class Database
 {
     public object $conn;
 
-    public function __construct(array $config)
+    public function __construct()
     {
-        $this->createConn($config);
+        $this->createConn(include 'config/dbcfg.php');
     }
 
-    private function createConn(array $config) : void
+    private function createConn(array $config): void
     {
         $this->conn = new PDO("mysql:host=" . $config['host'] . ";dbname=" . $config['database'], $config['user'], $config['password']);
     }
 
-    final public function addRecord(string $nameTable, array $columnTable, array $newRecord) : void
+    final public function addRecord(string $nameTable, array $columnTable, array $newRecord): bool|array
     {
+
         $q = '?';
         if (count($columnTable) !== 1) {
             for ($i = 1; $i < count($columnTable); $i++) {
@@ -30,37 +31,58 @@ final class Database
         }
         $columnsToString = implode(', ', $columnTable);
 
-        $sql = "INSERT INTO $nameTable (" . $columnsToString . ") VALUES (" . $q . ")";
+        $sql = "INSERT INTO $nameTable (" . $columnsToString . ") 
+                VALUES (" . $q . ")";
         $statement = $this->conn->prepare($sql);
-        $statement->execute($newRecord);
+
+        return $statement->execute($newRecord);
     }
 
-    final public function editRecord(string $nameTable, array $nameColumn, array $editRecord, string $columnIdTable, int $recordId) : void
+    final public function editRecord(string $nameTable, array $nameColumn, array $editRecord, string $columnIdTable, int $recordId): bool|array
     {
-        if (count($nameColumn) === count($editRecord)) {
-            $colsAndRecs = $nameColumn[0] . '=' . '"' . $editRecord[0] . '"';
-            for ($i = (count($nameColumn) - 1); $i > 0; $i--) {
-                $colsAndRecs = $colsAndRecs . ', ' . $nameColumn[$i] . '=' . '"' . $editRecord[$i] . '"';
-            }
-            $sql = "UPDATE $nameTable SET $colsAndRecs WHERE $columnIdTable = $recordId";
-            $statement = $this->conn->prepare($sql);
-            $statement->execute();
+        if (count($nameColumn) !== count($editRecord)) {
+            return false;
         }
-    }
 
-    final public function deleteRecord(string $nameTable, string $columnIdTable, int $recordID): void
-    {
-        $sql = "DELETE FROM " . $nameTable . " WHERE " . $columnIdTable . " = ? ";
+        $colsAndRecs = $nameColumn[0] . '=' . '"' . $editRecord[0] . '"';
+
+        for ($i = (count($nameColumn) - 1); $i > 0; $i--) {
+            $colsAndRecs = $colsAndRecs . ', ' . $nameColumn[$i] . '=' . '"' . $editRecord[$i] . '"';
+        }
+
+        $sql = "UPDATE $nameTable 
+                SET $colsAndRecs 
+                WHERE $columnIdTable = $recordId";
         $statement = $this->conn->prepare($sql);
-        $statement->execute([$recordID]);
+
+        return $statement->execute();
     }
 
-    final public function getRecord(string $tableName, string $columnName = null, string $recordName = null): array
+    final public function deleteRecord(string $nameTable, string $columnIdTable, int $recordID): bool|array
     {
+        if (!$nameTable
+            || !$columnIdTable
+            || !$recordID)
+            return false;
+
+        $sql = "DELETE FROM " . $nameTable . " 
+                WHERE " . $columnIdTable . " = ? ";
+        $statement = $this->conn->prepare($sql);
+
+        return $statement->execute([$recordID]);
+    }
+
+    final public function getRecord(string $tableName, string $columnName = null, string $recordName = null): bool|array
+    {
+        if (!$tableName)
+            return false;
+
         if ($columnName !== null && $recordName !== null) {
-            $sql = "SELECT * FROM " . $tableName . " WHERE " . $columnName . " = " . '"' . $recordName . '"';
+            $sql = "SELECT * FROM " . $tableName . " 
+                    WHERE " . $columnName . " = " . '"' . $recordName . '"';
         } else {
-            $sql = "SELECT * FROM " . $tableName;
+            $sql = "SELECT * 
+                    FROM " . $tableName;
         }
         $statement = $this->conn->prepare($sql);
         $statement->execute();
