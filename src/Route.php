@@ -12,10 +12,13 @@ final class Route
 {
     final public function page(): void
     {
-        $action = $_GET['page'] ?? 'home';
-        $panel = ['admin', 'editor', 'account'];
+        $action = Request::get('page') ?? 'home';
+        $panel = ['admin', 'editor', 'account', 'registration'];
 
-        if (!isset($_SESSION['user']) && in_array($_GET['page'], $panel)) {
+        if (
+            !isset($_SESSION['user'])
+            && in_array(Request::get('page'), $panel)
+        ) {
             $page = 'login';
         } else {
             switch ($action) {
@@ -36,6 +39,9 @@ final class Route
                     break;
                 case 'account':
                     $page = 'account';
+                    break;
+                case 'registration':
+                    $page = 'registration';
                     break;
                 default:
                     $page = 'home';
