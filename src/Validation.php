@@ -9,8 +9,7 @@ class Validation
     public static function validateUsername(string $username): bool
     {
         if (
-            Request::emptyPost($username)
-            || !preg_match("/^[a-zA-z0-9]*$/",Request::post($username))
+            !preg_match("/^[a-zA-z0-9]*$/", $username)
             || strlen($username) < 3
             || strlen($username) > 20
         )
@@ -21,11 +20,7 @@ class Validation
 
     public static function validatePassword(string $password): bool
     {
-        if (
-            Request::emptyPost($password)
-            || strlen(Request::post($password)) < 5
-            || strlen(Request::post($password)) > 17
-        )
+        if (strlen($password) < 5 || strlen($password) > 17)
             return false;
         else
             return true;

@@ -14,4 +14,9 @@ class AbstractController
     {
         $this->db = new Database();
     }
+
+    protected function redirect(string $page): void
+    {
+        header("Location:index.php?page=$page");
+    }
 }

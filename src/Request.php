@@ -11,7 +11,7 @@ class Request
         if (!isset($_POST[$key]))
             return NULL;
 
-        return ($trim) ? trim(strip_tags($_GET[$key])) : $_GET[$key];
+        return ($trim) ? trim(strip_tags($_POST[$key])) : $_POST[$key];
     }
 
     public static function isPost($key): bool
