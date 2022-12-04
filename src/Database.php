@@ -17,11 +17,21 @@ class Database
 
     private function createConn(array $config): void
     {
-        $this->conn = new PDO("mysql:host=" . $config['host'] . ";dbname=" . $config['database'], $config['user'], $config['password']);
+        $this->conn = new PDO(
+            "mysql:host=" . $config['host'] . ";dbname=" . $config['database'],
+            $config['user'],
+            $config['password']
+        );
     }
 
-    final public function addRecord(string $nameTable, array $columnTable, array $newRecord): bool|array
+    final public function addRecord(string $nameTable, array $columnTable, array $newRecord): void
     {
+        if (
+            !$nameTable
+            || !$columnTable
+            || !$newRecord
+        )
+            return;
 
         $q = '?';
         if (count($columnTable) !== 1) {
@@ -34,15 +44,20 @@ class Database
         $sql = "INSERT INTO $nameTable (" . $columnsToString . ") 
                 VALUES (" . $q . ")";
         $statement = $this->conn->prepare($sql);
-
-        return $statement->execute($newRecord);
+        $statement->execute($newRecord);
     }
 
-    final public function editRecord(string $nameTable, array $nameColumn, array $editRecord, string $columnIdTable, int $recordId): bool|array
+    final public function editRecord(string $nameTable, array $nameColumn, array $editRecord, string $columnIdTable, int $recordId): void
     {
-        if (count($nameColumn) !== count($editRecord)) {
-            return false;
-        }
+        if (
+            !$nameTable
+            || !$nameColumn
+            || !$editRecord
+            || !$columnIdTable
+            || !$recordId
+            || count($nameColumn) !== count($editRecord)
+        )
+            return;
 
         $colsAndRecs = $nameColumn[0] . '=' . '"' . $editRecord[0] . '"';
 
@@ -54,28 +69,28 @@ class Database
                 SET $colsAndRecs 
                 WHERE $columnIdTable = $recordId";
         $statement = $this->conn->prepare($sql);
-
-        return $statement->execute();
+        $statement->execute();
     }
 
-    final public function deleteRecord(string $nameTable, string $columnIdTable, int $recordID): bool|array
+    final public function deleteRecord(string $nameTable, string $columnIdTable, int $recordID): void
     {
-        if (!$nameTable
+        if (
+            !$nameTable
             || !$columnIdTable
-            || !$recordID)
-            return false;
+            || !$recordID
+        )
+            return;
 
         $sql = "DELETE FROM " . $nameTable . " 
                 WHERE " . $columnIdTable . " = ? ";
         $statement = $this->conn->prepare($sql);
-
-        return $statement->execute([$recordID]);
+        $statement->execute([$recordID]);
     }
 
-    final public function getRecord(string $tableName, string $columnName = null, string $recordName = null): bool|array
+    final public function getRecord(string $tableName, string $columnName = null, string $recordName = null): null|array
     {
         if (!$tableName)
-            return false;
+            return null;
 
         if ($columnName !== null && $recordName !== null) {
             $sql = "SELECT * FROM " . $tableName . " 
