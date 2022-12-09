@@ -87,7 +87,7 @@ class Database
         $statement->execute([$recordID]);
     }
 
-    final public function getRecord(string $tableName, string $columnName = null, string $recordName = null): null|array
+    final public function getRecord(string $tableName, string $columnName = null, string $recordName = null, string $columnOrder = null, string $columnSort = 'ASC'): null|array
     {
         if (!$tableName)
             return null;
@@ -99,6 +99,10 @@ class Database
             $sql = "SELECT * 
                     FROM " . $tableName;
         }
+
+        if ($recordName !== null)
+            $sql .= " ORDER BY ". $columnOrder . " " . $columnSort ;
+
         $statement = $this->conn->prepare($sql);
         $statement->execute();
 
