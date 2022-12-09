@@ -4,14 +4,11 @@ declare(strict_types=1);
 
 namespace App;
 
-require ('src/Route.php');
-require ('src/Request.php');
-require ('src/Validation.php');
-require ('src/Database.php');
-require ('src/controller/AbstractController.php');
-require ('src/controller/LoginController.php');
-require ('src/controller/RegistrationController.php');
-require ('src/model/UserTab.php');
+spl_autoload_register(function (string $namespaceClass) {
+    $path = str_replace(['\\', 'App/'], ['/', ''], $namespaceClass);
+    $path = "$path.php";
+    require_once($path);
+});
 
 use App\Src\Route;
 use App\Src\Controller\LoginController;
@@ -24,5 +21,3 @@ $registration = new RegistrationController();
 
 $loadPage = new Route();
 $loadPage->page();
-
-var_dump($_SESSION['user']);

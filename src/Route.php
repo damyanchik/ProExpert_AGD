@@ -4,10 +4,6 @@ declare(strict_types=1);
 
 namespace App\Src;
 
-require ('src/View.php');
-
-use App\Src\View;
-
 final class Route
 {
     final public function page(): void
