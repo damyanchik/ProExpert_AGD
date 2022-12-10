@@ -4,13 +4,11 @@ declare(strict_types=1);
 
 namespace App\Src\Controller;
 
-use App\Src\Database;
+use App\Src\Helper\Database;
 
 abstract class AbstractController
 {
     protected object $db;
-
-    abstract function render(): void;
 
     public function __construct()
     {
@@ -19,7 +17,6 @@ abstract class AbstractController
 
     protected function redirect(string $page): void
     {
-        header("Location:index.php?page=$page");
+        header("Location:/agd_w_czystym/index.php$page");
     }
-
 }

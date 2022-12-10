@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Src;
+namespace App\Src\Helper;
 
 use PDO;
 
@@ -12,7 +12,7 @@ class Database
 
     public function __construct()
     {
-        $this->createConn(include 'config/dbcfg.php');
+        $this->createConn(include __DIR__ . '\..\config\dbcfg.php');
     }
 
     private function createConn(array $config): void
@@ -100,7 +100,7 @@ class Database
                     FROM " . $tableName;
         }
 
-        if ($recordName !== null)
+        if ($recordName !== null && $columnOrder !== null )
             $sql .= " ORDER BY ". $columnOrder . " " . $columnSort ;
 
         $statement = $this->conn->prepare($sql);

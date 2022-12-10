@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace App\Src\Controller;
 
-use App\Src\Request;
 use App\Src\Router;
-use App\Src\Validation;
+use App\Src\Helper\Request;
+use App\Src\Helper\Validation;
 
 class RegistrationController extends AbstractController
 {
@@ -14,6 +14,7 @@ class RegistrationController extends AbstractController
     {
         parent::__construct();
         $this->registerUser();
+        $this->render();
     }
 
     public function registerUser(): void

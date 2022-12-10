@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Src;
+namespace App\Src\Helper;
 
 class Validation
 {
