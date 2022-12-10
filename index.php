@@ -10,7 +10,7 @@ spl_autoload_register(function (string $namespaceClass) {
     require_once($path);
 });
 
-use App\Src\Route;
+use App\Src\Router;
 use App\Src\Controller\LoginController;
 use App\Src\Controller\RegistrationController;
 
@@ -19,5 +19,9 @@ session_start();
 $login = new LoginController();
 $registration = new RegistrationController();
 
-$loadPage = new Route();
-$loadPage->page();
+Router::route('/', 'home');
+Router::route('/contact', 'contact');
+Router::route('/about', 'about');
+Router::route('/admin', 'admin');
+Router::route('/coverage', 'coverage');
+

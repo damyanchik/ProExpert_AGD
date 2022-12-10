@@ -6,9 +6,11 @@ namespace App\Src\Controller;
 
 use App\Src\Database;
 
-class AbstractController
+abstract class AbstractController
 {
     protected object $db;
+
+    abstract function render(): void;
 
     public function __construct()
     {
@@ -19,4 +21,5 @@ class AbstractController
     {
         header("Location:index.php?page=$page");
     }
+
 }

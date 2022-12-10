@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\Src\Controller;
 
-use App\Src\Controller\AbstractController;
 use App\Src\Request;
+use App\Src\Router;
 use App\Src\Validation;
 
 class LoginController extends AbstractController
@@ -15,6 +15,7 @@ class LoginController extends AbstractController
         parent::__construct();
         $this->loginUser();
         $this->logoutUser();
+        $this->render();
     }
 
     public function loginUser(): void
@@ -49,4 +50,10 @@ class LoginController extends AbstractController
             $this->redirect('home');
         }
     }
+
+    public function render(): void
+    {
+        Router::route('/login', 'login');
+    }
+
 }

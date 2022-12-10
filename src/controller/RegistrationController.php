@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\Src\Controller;
 
-use App\Src\Controller\AbstractController;
 use App\Src\Request;
+use App\Src\Router;
 use App\Src\Validation;
 
 class RegistrationController extends AbstractController
@@ -54,5 +54,10 @@ class RegistrationController extends AbstractController
         ]);
 
         $this->redirect('registration');
+    }
+
+    public function render():void
+    {
+        Router::route('/registration', 'registration');
     }
 }
