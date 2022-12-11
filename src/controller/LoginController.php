@@ -5,14 +5,18 @@ declare(strict_types=1);
 namespace App\Src\Controller;
 
 use App\Src\Helper\Request;
+use App\Src\Model\UserModel;
 use App\Src\Router;
 use App\Src\Helper\Validation;
 
 class LoginController extends AbstractController
 {
+    protected object $userModel;
+
     public function __construct()
     {
-        parent::__construct();
+        $this->userModel = new UserModel();
+
         $this->loginUser();
         $this->logoutUser();
         $this->render();
@@ -40,16 +44,15 @@ class LoginController extends AbstractController
 
     private function passwordVerification(): bool
     {
-        $dbPassword = $this->db->getRecord(
-            \UserTab::NAME,
-            \UserTab::LOGIN_COLUMN,
-            Request::post('login')
-        );
 
-        if ($dbPassword !== null)
+        $checkPass = $this->userModel->find(
+            'login',
+            Request::post('login'));
+
+        if ($checkPass == null)
             return false;
 
-        if ($dbPassword[0]['user_password'] != md5(Request::post('password')))
+        if ($checkPass[0]['user_password'] != md5(Request::post('password')))
             return false;
 
         return true;

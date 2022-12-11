@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace App\Src\Helper;
+namespace App\Src\Model;
 
 use PDO;
 
-class Database
+abstract class AbstractModel
 {
     public object $conn;
 
@@ -87,11 +87,8 @@ class Database
         $statement->execute([$recordID]);
     }
 
-    final public function getRecord(string $tableName, string $columnName = null, string $recordName = null, string $columnOrder = null, string $columnSort = 'ASC'): null|array
+    final public function getRecord(string $tableName, string $columnName = null, string|int $recordName = null, string $columnOrder = null, string $columnSort = 'ASC'): array
     {
-        if (!$tableName)
-            return null;
-
         if ($columnName !== null && $recordName !== null) {
             $sql = "SELECT * FROM " . $tableName . " 
                     WHERE " . $columnName . " = " . '"' . $recordName . '"';

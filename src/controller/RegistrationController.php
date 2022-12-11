@@ -4,57 +4,56 @@ declare(strict_types=1);
 
 namespace App\Src\Controller;
 
+use App\Src\Model\UserModel;
 use App\Src\Router;
 use App\Src\Helper\Request;
 use App\Src\Helper\Validation;
 
 class RegistrationController extends AbstractController
 {
+    protected object $userModel;
+
     public function __construct()
     {
-        parent::__construct();
+        $this->userModel = new UserModel();
+
         $this->registerUser();
         $this->render();
     }
 
     public function registerUser(): void
     {
+        if (!$this->validateRegistration())
+            return;
+
+        $this->userModel->create([
+            'login' => Request::post('regLogin'),
+            'email' => Request::post('regEmail'),
+            'password' => Request::post('regPassword')
+        ]);
+
+        $this->redirect('/');
+    }
+
+    private function validateRegistration(): bool
+    {
         if (
-            !isset($_SESSION['user'])
-            || !Request::isPost('registration')
-            || Request::emptyPost('regLogin')
+            !Request::isPost('registration')
             || Request::emptyPost('regEmail')
-            || Request::emptyPost('regPassword')
             || !Validation::validateUsername(Request::post('regLogin'))
             || !Validation::validatePassword(Request::post('regPassword'))
-            || $this->db->getRecord(
-                \UserTab::NAME,
-                \UserTab::LOGIN_COLUMN,
+            || $this->userModel->find(
+                'login',
                 Request::post('regLogin')
             )
-            || $this->db->getRecord(
-                \UserTab::NAME,
-                \UserTab::EMAIL_COLUMN,
+            || $this->userModel->find(
+                'email',
                 Request::post('regEmail')
             )
         )
-            return;
+            return false;
 
-        $cryptPassword = md5(Request::post('regPassword'));
-
-        $this->db->addRecord(
-            \UserTab::NAME, [
-                \UserTab::LOGIN_COLUMN,
-                \UserTab::EMAIL_COLUMN,
-                \UserTab::PASSWORD_COLUMN
-        ],
-            [
-                Request::post('regLogin'),
-                Request::post('regEmail'),
-                $cryptPassword
-        ]);
-
-        $this->redirect('registration');
+        return true;
     }
 
     public function render():void

@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace App;
 
-require_once('src/model/UserTab.php');
-
 spl_autoload_register(function (string $namespaceClass) {
     $path = str_replace(['\\', 'App/'], ['/', ''], $namespaceClass);
     $path = "$path.php";
@@ -26,3 +24,5 @@ Router::route('/contact', 'contact');
 Router::route('/about', 'about');
 Router::route('/admin', 'admin');
 Router::route('/coverage', 'coverage');
+
+var_dump($_SESSION['user']);
