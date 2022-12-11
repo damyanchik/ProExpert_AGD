@@ -25,4 +25,3 @@ Router::route('/about', 'about');
 Router::route('/admin', 'admin');
 Router::route('/coverage', 'coverage');
 
-var_dump($_SESSION['user']);

@@ -27,7 +27,7 @@ class LoginController extends AbstractController
         if (!self::validateLogin())
             return;
 
-        if (!self::passwordVerification())
+        if (!self::dataVerification())
             return;
 
         $_SESSION['user'] = Request::post('login');
@@ -36,13 +36,14 @@ class LoginController extends AbstractController
 
     public function logoutUser(): void
     {
-        if (isset($_SESSION['user']) && Request::isGet('logout')) {
-            session_destroy();
-            $this->redirect('/');
-        }
+        if (!isset($_SESSION['user']) && !Request::isGet('logout'))
+            return;
+
+        session_destroy();
+        $this->redirect('/');
     }
 
-    private function passwordVerification(): bool
+    private function dataVerification(): bool
     {
 
         $checkPass = $this->userModel->find(
@@ -62,8 +63,9 @@ class LoginController extends AbstractController
     {
         if (
             isset($_SESSION['user'])
-            || Request::emptyPost('login')
+            || Request::isPost('authorisation')
             || Request::emptyPost('password')
+            || Request::emptyPost('login')
             || !Validation::validateUsername(Request::post('login'))
             || !Validation::validatePassword(Request::post('password'))
         )

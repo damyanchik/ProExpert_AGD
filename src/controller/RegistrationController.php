@@ -39,10 +39,20 @@ class RegistrationController extends AbstractController
     {
         if (
             !Request::isPost('registration')
-            || Request::emptyPost('regEmail')
+            || !Validation::validateEmail(Request::post('regEmail'))
             || !Validation::validateUsername(Request::post('regLogin'))
             || !Validation::validatePassword(Request::post('regPassword'))
-            || $this->userModel->find(
+            || $this->findMatches()
+        )
+            return false;
+
+        return true;
+    }
+
+    private function findMatches(): bool
+    {
+        if (
+            $this->userModel->find(
                 'login',
                 Request::post('regLogin')
             )
@@ -51,12 +61,12 @@ class RegistrationController extends AbstractController
                 Request::post('regEmail')
             )
         )
-            return false;
+            return true;
 
-        return true;
+        return false;
     }
 
-    public function render():void
+    public function render(): void
     {
         Router::route('/registration', 'registration');
     }

@@ -14,15 +14,23 @@ class Validation
             || strlen($username) > 20
         )
             return false;
-        else
-            return true;
+
+        return true;
     }
 
     public static function validatePassword(string $password): bool
     {
         if (strlen($password) < 5 || strlen($password) > 17)
             return false;
-        else
-            return true;
+
+        return true;
+    }
+
+    public static function validateEmail(string $email): bool
+    {
+        if (!filter_var($email, FILTER_VALIDATE_EMAIL))
+            return false;
+
+        return true;
     }
 }

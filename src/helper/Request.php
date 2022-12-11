@@ -18,16 +18,16 @@ class Request
     {
         if (!isset($_POST[$key]))
             return false;
-        else
-            return true;
+
+        return true;
     }
 
     public static function emptyPost($key): bool
     {
         if (!empty($_POST[$key]))
             return false;
-        else
-            return true;
+
+        return true;
     }
 
     public static function get($key, $trim = false): mixed
@@ -42,15 +42,15 @@ class Request
     {
         if (!isset($_GET[$key]))
             return false;
-        else
-            return true;
+
+        return true;
     }
 
     public static function emptyGet($key): bool
     {
         if (!empty($_GET[$key]))
             return false;
-        else
-            return true;
+
+        return true;
     }
 }
