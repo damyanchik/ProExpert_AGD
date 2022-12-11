@@ -9,18 +9,18 @@ use App\Src\Model\ModelInterface;
 
 class UserModel extends AbstractModel implements ModelInterface
 {
-    const NAME = 'usertab';
+    const NAME = 'user';
     const COLUMNS = [
-        'user_id',
-        'user_login',
-        'user_email',
-        'user_password'
+        'id',
+        'username',
+        'email',
+        'password'
     ];
-    const ID_COLUMN = 'user_id';
-    const LOGIN_COLUMN = 'user_login';
-    const EMAIL_COLUMN = 'user_email';
-    const PASSWORD_COLUMN = 'user_password';
-    const STATUS_COLUMN = 'user_status';
+    const ID = 'id';
+    const USERNAME = 'username';
+    const EMAIL = 'email';
+    const PASSWORD = 'password';
+    const STATUS = 'status';
 
     public function create(array $data): void
     {
@@ -28,12 +28,12 @@ class UserModel extends AbstractModel implements ModelInterface
 
         $this->addRecord(
             self::NAME, [
-                self::LOGIN_COLUMN,
-                self::EMAIL_COLUMN,
-                self::PASSWORD_COLUMN
+                self::USERNAME,
+                self::EMAIL,
+                self::PASSWORD
             ],
             [
-                $data['login'],
+                $data['username'],
                 $data['email'],
                 $data['password']
             ]
@@ -44,7 +44,7 @@ class UserModel extends AbstractModel implements ModelInterface
     {
         return $this->getRecord(
             self::NAME,
-            self::ID_COLUMN,
+            self::ID,
             $id
         );
     }
@@ -58,28 +58,16 @@ class UserModel extends AbstractModel implements ModelInterface
     {
         $this->deleteRecord(
             self::NAME,
-            self::ID_COLUMN,
+            self::ID,
             $id
         );
     }
 
     public function find(string $column, string $search): array
     {
-        $name = array_map(
-            fn($columns): string =>
-            str_replace(
-                'user_',
-                '',
-                $columns
-            ),
-            self::COLUMNS
-        );
-
-        $nameId = array_search($column, $name);
-
         return $this->getRecord(
             self::NAME,
-            self::COLUMNS[$nameId],
+            $column,
             $search
         );
     }

@@ -27,7 +27,7 @@ class RegistrationController extends AbstractController
             return;
 
         $this->userModel->create([
-            'login' => Request::post('regLogin'),
+            'username' => Request::post('regUsername'),
             'email' => Request::post('regEmail'),
             'password' => Request::post('regPassword')
         ]);
@@ -40,7 +40,7 @@ class RegistrationController extends AbstractController
         if (
             !Request::isPost('registration')
             || !Validation::validateEmail(Request::post('regEmail'))
-            || !Validation::validateUsername(Request::post('regLogin'))
+            || !Validation::validateUsername(Request::post('regUsername'))
             || !Validation::validatePassword(Request::post('regPassword'))
             || $this->findMatches()
         )
@@ -53,8 +53,8 @@ class RegistrationController extends AbstractController
     {
         if (
             $this->userModel->find(
-                'login',
-                Request::post('regLogin')
+                'username',
+                Request::post('regUsername')
             )
             || $this->userModel->find(
                 'email',

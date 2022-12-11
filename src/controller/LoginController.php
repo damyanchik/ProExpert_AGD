@@ -30,7 +30,7 @@ class LoginController extends AbstractController
         if (!self::dataVerification())
             return;
 
-        $_SESSION['user'] = Request::post('login');
+        $_SESSION['user'] = Request::post('username');
         $this->redirect('/admin');
     }
 
@@ -45,15 +45,14 @@ class LoginController extends AbstractController
 
     private function dataVerification(): bool
     {
-
         $checkPass = $this->userModel->find(
-            'login',
-            Request::post('login'));
+            'username',
+            Request::post('username'));
 
         if ($checkPass == null)
             return false;
 
-        if ($checkPass[0]['user_password'] != md5(Request::post('password')))
+        if ($checkPass[0]['password'] != md5(Request::post('password')))
             return false;
 
         return true;
@@ -65,8 +64,8 @@ class LoginController extends AbstractController
             isset($_SESSION['user'])
             || Request::isPost('authorisation')
             || Request::emptyPost('password')
-            || Request::emptyPost('login')
-            || !Validation::validateUsername(Request::post('login'))
+            || Request::emptyPost('username')
+            || !Validation::validateUsername(Request::post('username'))
             || !Validation::validatePassword(Request::post('password'))
         )
             return false;
