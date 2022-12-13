@@ -21,7 +21,12 @@ class RegistrationController extends AbstractController
         $this->render();
     }
 
-    public function registerUser(): void
+    private function render(): void
+    {
+        Router::route('/registration', 'registration');
+    }
+
+    private function registerUser(): void
     {
         if (!$this->validateRegistration())
             return;
@@ -64,10 +69,5 @@ class RegistrationController extends AbstractController
             return true;
 
         return false;
-    }
-
-    public function render(): void
-    {
-        Router::route('/registration', 'registration');
     }
 }

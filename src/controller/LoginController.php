@@ -22,21 +22,29 @@ class LoginController extends AbstractController
         $this->render();
     }
 
-    public function loginUser(): void
+    private function render(): void
     {
-        if (!self::validateLogin())
-            return;
+        Router::route('/login', 'login');
+    }
 
-        if (!self::dataVerification())
+    private function loginUser(): void
+    {
+        if (
+            !self::validateLogin()
+            || !self::dataVerification()
+        )
             return;
 
         $_SESSION['user'] = Request::post('username');
         $this->redirect('/admin');
     }
 
-    public function logoutUser(): void
+    private function logoutUser(): void
     {
-        if (!isset($_SESSION['user']) && !Request::isGet('logout'))
+        if (
+            !isset($_SESSION['user'])
+            && !Request::isGet('logout')
+        )
             return;
 
         session_destroy();
@@ -47,12 +55,13 @@ class LoginController extends AbstractController
     {
         $checkPass = $this->userModel->find(
             'username',
-            Request::post('username'));
+            Request::post('username')
+        );
 
-        if ($checkPass == null)
-            return false;
-
-        if ($checkPass[0]['password'] != md5(Request::post('password')))
+        if (
+            $checkPass == null
+            || $checkPass[0]['password'] != md5(Request::post('password'))
+        )
             return false;
 
         return true;
@@ -71,10 +80,5 @@ class LoginController extends AbstractController
             return false;
 
         return true;
-    }
-
-    public function render(): void
-    {
-        Router::route('/login', 'login');
     }
 }

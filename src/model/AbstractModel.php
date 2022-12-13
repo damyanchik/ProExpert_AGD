@@ -24,7 +24,7 @@ abstract class AbstractModel
         );
     }
 
-    final public function addRecord(string $nameTable, array $columnTable, array $newRecord): void
+    final protected function addRecord(string $nameTable, array $columnTable, array $newRecord): void
     {
         if (
             !$nameTable
@@ -43,11 +43,12 @@ abstract class AbstractModel
 
         $sql = "INSERT INTO $nameTable (" . $columnsToString . ") 
                 VALUES (" . $q . ")";
+
         $statement = $this->conn->prepare($sql);
         $statement->execute($newRecord);
     }
 
-    final public function editRecord(string $nameTable, array $nameColumn, array $editRecord, string $columnIdTable, int $recordId): void
+    final protected function editRecord(string $nameTable, array $nameColumn, array $editRecord, string $columnIdTable, int $recordId): void
     {
         if (
             !$nameTable
@@ -68,11 +69,12 @@ abstract class AbstractModel
         $sql = "UPDATE $nameTable 
                 SET $colsAndRecs 
                 WHERE $columnIdTable = $recordId";
+
         $statement = $this->conn->prepare($sql);
         $statement->execute();
     }
 
-    final public function deleteRecord(string $nameTable, string $columnIdTable, int $recordID): void
+    final protected function deleteRecord(string $nameTable, string $columnIdTable, int $recordID): void
     {
         if (
             !$nameTable
@@ -83,11 +85,12 @@ abstract class AbstractModel
 
         $sql = "DELETE FROM " . $nameTable . " 
                 WHERE " . $columnIdTable . " = ? ";
+
         $statement = $this->conn->prepare($sql);
         $statement->execute([$recordID]);
     }
 
-    final public function getRecord(string $tableName, string $columnName = null, string|int $recordName = null, string $columnOrder = null, string $columnSort = 'ASC'): array
+    final protected function getRecord(string $tableName, string $columnName = null, string|int $recordName = null, string $columnOrder = null, string $columnSort = 'ASC'): array
     {
         if ($columnName !== null && $recordName !== null) {
             $sql = "SELECT * FROM " . $tableName . " 

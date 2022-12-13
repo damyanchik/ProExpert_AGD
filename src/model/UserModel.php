@@ -14,7 +14,8 @@ class UserModel extends AbstractModel implements ModelInterface
         'id',
         'username',
         'email',
-        'password'
+        'password',
+        'status'
     ];
     const ID = 'id';
     const USERNAME = 'username';

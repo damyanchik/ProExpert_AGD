@@ -27,7 +27,7 @@ class Router
         print self::implementParam(['pagePlace' => $view], $layout);
     }
 
-    private static function loadTemplate(string $fileDirection): string|null
+    private static function loadTemplate(string $fileDirection): null|string
     {
         if (
             $fileDirection === null
