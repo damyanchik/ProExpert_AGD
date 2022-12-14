@@ -27,14 +27,8 @@ class Router
         print self::implementParam(['pagePlace' => $view], $layout);
     }
 
-    private static function loadTemplate(string $fileDirection): null|string
+    private static function loadTemplate(string $fileDirection): string
     {
-        if (
-            $fileDirection === null
-            && !file_exists(__DIR__ . '../templates/pages' . $fileDirection . '.php')
-        )
-            return null;
-
         ob_start();
         include(__DIR__ . '\..\templates\\' . $fileDirection . '.html');
         $view = ob_get_clean();
@@ -42,7 +36,7 @@ class Router
         return $view;
     }
 
-    private static function implementParam(array $replace, string $template): null|string
+    private static function implementParam(array $replace, string $template): string
     {
         foreach ($replace as $search => $change)
             $view = str_replace('[%' . $search . '%]', $change, $template);
