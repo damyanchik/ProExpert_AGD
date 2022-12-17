@@ -6,8 +6,8 @@ namespace App\Src\Controller;
 
 use App\Src\Helper\Request;
 use App\Src\Model\UserModel;
-use App\Src\Router;
 use App\Src\Helper\Validation;
+use App\Src\Router;
 
 class LoginController extends AbstractController
 {
@@ -22,7 +22,7 @@ class LoginController extends AbstractController
         $this->render();
     }
 
-    private function render(): void
+    private function render()
     {
         Router::route('/login', 'login');
     }
@@ -36,7 +36,7 @@ class LoginController extends AbstractController
             return;
 
         $_SESSION['user'] = Request::post('username');
-        $this->redirect('/admin');
+        $this->redirectToPage('/admin');
     }
 
     private function logoutUser(): void
@@ -48,19 +48,19 @@ class LoginController extends AbstractController
             return;
 
         session_destroy();
-        $this->redirect('/');
+        $this->redirectToPage('/');
     }
 
     private function dataVerification(): bool
     {
-        $checkPass = $this->userModel->find(
+        $password = $this->userModel->find(
             'username',
             Request::post('username')
         );
 
         if (
-            $checkPass == null
-            || $checkPass[0]['password'] != md5(Request::post('password'))
+            $password == null
+            || $password[0]['password'] != md5(Request::post('password'))
         )
             return false;
 

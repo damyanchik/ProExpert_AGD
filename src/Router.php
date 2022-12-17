@@ -14,9 +14,6 @@ class Router
         if ($userUri !== $path . $uri)
             return;
 
-        if (!$template)
-            return;
-
         $view = self::loadTemplate('pages/' . $template);
 
         if ($params !== null)
@@ -24,7 +21,7 @@ class Router
 
         $layout = self::loadTemplate('layout');
 
-        print self::implementParam(['pagePlace' => $view], $layout);
+        print self::implementParam(['pagePosition' => $view], $layout);
     }
 
     private static function loadTemplate(string $fileDirection): string

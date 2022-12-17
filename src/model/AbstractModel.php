@@ -26,13 +26,6 @@ abstract class AbstractModel
 
     final protected function addRecord(string $nameTable, array $columnTable, array $newRecord): void
     {
-        if (
-            !$nameTable
-            || !$columnTable
-            || !$newRecord
-        )
-            return;
-
         $q = '?';
         if (count($columnTable) !== 1) {
             for ($i = 1; $i < count($columnTable); $i++) {
@@ -50,14 +43,7 @@ abstract class AbstractModel
 
     final protected function editRecord(string $nameTable, array $nameColumn, array $editRecord, string $columnIdTable, int $recordId): void
     {
-        if (
-            !$nameTable
-            || !$nameColumn
-            || !$editRecord
-            || !$columnIdTable
-            || !$recordId
-            || count($nameColumn) !== count($editRecord)
-        )
+        if (count($nameColumn) !== count($editRecord))
             return;
 
         $colsAndRecs = $nameColumn[0] . '=' . '"' . $editRecord[0] . '"';
@@ -76,13 +62,6 @@ abstract class AbstractModel
 
     final protected function deleteRecord(string $nameTable, string $columnIdTable, int $recordID): void
     {
-        if (
-            !$nameTable
-            || !$columnIdTable
-            || !$recordID
-        )
-            return;
-
         $sql = "DELETE FROM " . $nameTable . " 
                 WHERE " . $columnIdTable . " = ? ";
 

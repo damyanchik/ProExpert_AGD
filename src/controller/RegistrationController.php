@@ -21,7 +21,7 @@ class RegistrationController extends AbstractController
         $this->render();
     }
 
-    private function render(): void
+    private function render()
     {
         Router::route('/registration', 'registration');
     }
@@ -37,7 +37,7 @@ class RegistrationController extends AbstractController
             'password' => Request::post('regPassword')
         ]);
 
-        $this->redirect('/');
+        $this->redirectToPage('/');
     }
 
     private function validateRegistration(): bool
@@ -47,14 +47,14 @@ class RegistrationController extends AbstractController
             || !Validation::validateEmail(Request::post('regEmail'))
             || !Validation::validateUsername(Request::post('regUsername'))
             || !Validation::validatePassword(Request::post('regPassword'))
-            || $this->findMatches()
+            || $this->findMatch()
         )
             return false;
 
         return true;
     }
 
-    private function findMatches(): bool
+    private function findMatch(): bool
     {
         if (
             $this->userModel->find(

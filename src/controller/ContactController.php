@@ -1,0 +1,21 @@
+<?php
+
+declare(strict_types=1);
+
+namespace App\Src\Controller;
+
+use App\Src\Router;
+
+class ContactController extends AbstractController
+{
+    public function __construct()
+    {
+        $this->render();
+    }
+
+    private function render(): void
+    {
+        Router::route('/contact', 'contact');
+    }
+
+}

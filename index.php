@@ -11,17 +11,21 @@ spl_autoload_register(function (string $namespaceClass) {
 });
 
 use App\Src\Router;
+use App\Src\Controller\AboutController;
+use App\Src\Controller\ContactController;
+use App\Src\Controller\CoverageController;
+use App\Src\Controller\HomeController;
 use App\Src\Controller\LoginController;
 use App\Src\Controller\RegistrationController;
 
 session_start();
 
-$login = new LoginController();
 $registration = new RegistrationController();
+$login = new LoginController();
+$home = new HomeController();
+$contact = new ContactController();
+$about = new AboutController();
+$admin = new CoverageController();
 
-Router::route('/', 'home');
-Router::route('/contact', 'contact');
-Router::route('/about', 'about');
 Router::route('/admin', 'admin');
-Router::route('/coverage', 'coverage');
 
