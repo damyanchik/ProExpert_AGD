@@ -10,22 +10,26 @@ spl_autoload_register(function (string $namespaceClass) {
     require($path);
 });
 
-use App\Src\Router;
 use App\Src\Controller\AboutController;
 use App\Src\Controller\ContactController;
 use App\Src\Controller\CoverageController;
 use App\Src\Controller\HomeController;
 use App\Src\Controller\LoginController;
-use App\Src\Controller\RegistrationController;
+
+use App\Src\Controller\Admin\AccountController;
+use App\Src\Controller\Admin\AdminController;
+use App\Src\Controller\Admin\EditorController;
+use App\Src\Controller\Admin\RegistrationController;
 
 session_start();
 
-$registration = new RegistrationController();
 $login = new LoginController();
 $home = new HomeController();
 $contact = new ContactController();
 $about = new AboutController();
-$admin = new CoverageController();
+$coverage = new CoverageController();
 
-Router::route('/admin', 'admin');
-
+$account = new AccountController();
+$admin = new AdminController();
+$editor = new EditorController();
+$registration = new RegistrationController();

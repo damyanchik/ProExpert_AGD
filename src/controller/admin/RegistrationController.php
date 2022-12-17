@@ -2,12 +2,13 @@
 
 declare(strict_types=1);
 
-namespace App\Src\Controller;
+namespace App\Src\Controller\Admin;
 
 use App\Src\Model\UserModel;
 use App\Src\Router;
 use App\Src\Helper\Request;
 use App\Src\Helper\Validation;
+use App\Src\Controller\AbstractController;
 
 class RegistrationController extends AbstractController
 {
@@ -15,14 +16,13 @@ class RegistrationController extends AbstractController
 
     public function __construct()
     {
+        parent::__construct();
         $this->userModel = new UserModel();
-
-        $this->registerUser();
-        $this->render();
     }
 
-    private function render()
+    protected function render(): void
     {
+        $this->registerUser();
         Router::route('/registration', 'registration');
     }
 

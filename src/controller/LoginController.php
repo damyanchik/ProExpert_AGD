@@ -11,19 +11,11 @@ use App\Src\Router;
 
 class LoginController extends AbstractController
 {
-    protected object $userModel;
 
-    public function __construct()
+    protected function render(): void
     {
-        $this->userModel = new UserModel();
-
         $this->loginUser();
         $this->logoutUser();
-        $this->render();
-    }
-
-    private function render()
-    {
         Router::route('/login', 'login');
     }
 
@@ -43,7 +35,7 @@ class LoginController extends AbstractController
     {
         if (
             !isset($_SESSION['user'])
-            && !Request::isGet('logout')
+            || !Request::isGet('logout')
         )
             return;
 
@@ -53,7 +45,9 @@ class LoginController extends AbstractController
 
     private function dataVerification(): bool
     {
-        $password = $this->userModel->find(
+        $userModel = new UserModel();
+
+        $password = $userModel->find(
             'username',
             Request::post('username')
         );

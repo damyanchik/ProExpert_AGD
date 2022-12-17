@@ -8,12 +8,7 @@ use App\Src\Router;
 
 class ContactController extends AbstractController
 {
-    public function __construct()
-    {
-        $this->render();
-    }
-
-    private function render(): void
+    protected function render(): void
     {
         Router::route('/contact', 'contact');
     }

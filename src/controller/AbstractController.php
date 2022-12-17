@@ -6,6 +6,11 @@ namespace App\Src\Controller;
 
 abstract class AbstractController
 {
+    public function __construct()
+    {
+        $this->render();
+    }
+
     protected function access(array $status, string $page): void
     {
         if (in_array($_SESSION['status'], $status))
@@ -23,5 +28,9 @@ abstract class AbstractController
     {
         header("Location: $link");
         die();
+    }
+
+    protected function render(): void
+    {
     }
 }
