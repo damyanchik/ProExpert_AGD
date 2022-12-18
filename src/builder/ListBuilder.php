@@ -6,10 +6,10 @@ namespace App\Src\Builder;
 
 class ListBuilder extends AbstractBuilder implements BuilderInterface
 {
-    public static function create(string $file, array $param): void
+    public static function create(string $file, array $param): string
     {
         $pattern = AbstractBuilder::fileToString($file);
 
-        print AbstractBuilder::implementParam($param, $pattern, true);
+        return AbstractBuilder::implementParam($param, $pattern, true);
     }
 }
