@@ -17,12 +17,22 @@ abstract class AbstractBuilder
 
     protected static function implementParam(array $replace, string $pattern, bool $isList = false): string
     {
+        $view = '';
+        $loop = $pattern;
+
         if ($isList) {
-            foreach ($replace as $search => $change)
-                $view .= str_replace('[%' . $search . '%]', $change, $pattern);
+           for ($i = 0; $i < count($replace); $i++) {
+               foreach ($replace[$i] as $search => $change) {
+                   var_dump($change);
+                   $loop = str_replace('[%' . $search . '%]', strval($change), $loop);
+               }
+               $view .= $loop;
+               $loop = $pattern;
+               var_dump($view);
+           }
         } else {
             foreach ($replace as $search => $change)
-                $view = str_replace('[%' . $search . '%]', $change, $pattern);
+                $view = str_replace('[%' . $search . '%]', strval($change), $pattern);
         }
 
         return $view;
