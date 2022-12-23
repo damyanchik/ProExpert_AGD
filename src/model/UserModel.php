@@ -38,13 +38,18 @@ class UserModel extends AbstractModel implements ModelInterface
         );
     }
 
-    public function get(int $id): array
+    public function get(int $id = null): array
     {
-        return $this->getRecord(
-            self::NAME,
-            self::ID,
-            $id
-        );
+        if ($id !== null)
+            return $this->getRecord(
+                self::NAME,
+                self::ID,
+                $id
+            );
+        else
+            return $this->getRecord(
+                self::NAME
+            );
     }
 
     public function update(int $id, array $data): void
