@@ -11,6 +11,6 @@ interface ModelInterface
 
     public function create(array $data): void;
     public function get(int $id): array;
-    public function update(int $id, array $date): void;
+    public function update(int $id, array $data): void;
     public function delete(int $id): void;
 }

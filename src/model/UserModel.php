@@ -11,7 +11,6 @@ class UserModel extends AbstractModel implements ModelInterface
 {
     const NAME = 'user';
     const COLUMNS = [
-        'id',
         'username',
         'email',
         'password',
@@ -28,15 +27,13 @@ class UserModel extends AbstractModel implements ModelInterface
         $data['password'] = md5($data['password']);
 
         $this->addRecord(
-            self::NAME, [
-                self::USERNAME,
-                self::EMAIL,
-                self::PASSWORD
-            ],
+            self::NAME,
+            self::COLUMNS,
             [
                 $data['username'],
                 $data['email'],
-                $data['password']
+                $data['password'],
+                $data['status']
             ]
         );
     }
@@ -52,7 +49,18 @@ class UserModel extends AbstractModel implements ModelInterface
 
     public function update(int $id, array $data): void
     {
-
+        $this->editRecord(
+            self::NAME,
+            self::COLUMNS,
+            [
+                $data['username'],
+                $data['email'],
+                $data['password'],
+                $data['status']
+            ],
+            self::ID,
+            $id
+        );
     }
 
     public function delete(int $id): void
