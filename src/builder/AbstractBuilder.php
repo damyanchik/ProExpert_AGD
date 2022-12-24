@@ -23,18 +23,16 @@ abstract class AbstractBuilder
         if ($isList) {
            for ($i = 0; $i < count($replace); $i++) {
                foreach ($replace[$i] as $search => $change) {
-                   var_dump($change);
                    $loop = str_replace('[%' . $search . '%]', strval($change), $loop);
                }
                $view .= $loop;
                $loop = $pattern;
-               var_dump($view);
            }
         } else {
             foreach ($replace as $search => $change)
-                $view = str_replace('[%' . $search . '%]', strval($change), $pattern);
+                $loop = str_replace('[%' . $search . '%]', strval($change), $loop);
+            $view = $loop;
         }
-
         return $view;
     }
 }
