@@ -10,6 +10,32 @@ class ListBuilder extends AbstractBuilder implements BuilderInterface
     {
         $pattern = AbstractBuilder::fileToString($file);
 
-        return AbstractBuilder::implementParam($param, $pattern, true);
+        return self::construct($param, $pattern);
+    }
+
+    private static function construct(array $list, string $pattern): string
+    {
+        $view = '';
+
+        for ($i = 0; $i < count($list); $i++) {
+            $view .= AbstractBuilder::implementParam($list[$i], $pattern);
+        }
+
+        return $view;
+    }
+
+    public static function modify(array $list, array $keys, array $values, array $conditions = null): array
+    {
+        for ($n = 0; $n < count($keys); $n++) {
+            for ($i = 0; $i < count($list); $i++) {
+                if ($conditions != null && $list[$i][$keys[$n]] != $conditions[$values[$n]]) {
+                    continue;
+                } else {
+                    $list[$i][$keys[$n]] = $values[$n];
+                }
+            }
+        }
+
+        return $list;
     }
 }

@@ -15,24 +15,16 @@ abstract class AbstractBuilder
         return $view;
     }
 
-    protected static function implementParam(array $replace, string $pattern, bool $isList = false): string
+    protected static function implementParam(array $replace, string $pattern): string
     {
         $view = '';
         $loop = $pattern;
 
-        if ($isList) {
-           for ($i = 0; $i < count($replace); $i++) {
-               foreach ($replace[$i] as $search => $change) {
-                   $loop = str_replace('[%' . $search . '%]', strval($change), $loop);
-               }
-               $view .= $loop;
-               $loop = $pattern;
-           }
-        } else {
-            foreach ($replace as $search => $change)
-                $loop = str_replace('[%' . $search . '%]', strval($change), $loop);
+        foreach ($replace as $search => $change) {
+            $loop = str_replace('[%' . $search . '%]', strval($change), $loop);
             $view = $loop;
         }
+
         return $view;
     }
 }
