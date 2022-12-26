@@ -16,14 +16,14 @@ class RegistrationController extends AbstractController
 
     public function __construct()
     {
-        parent::__construct();
         $this->userModel = new UserModel();
+        parent::__construct();
     }
 
     protected function render(): void
     {
         $this->registerUser();
-        Router::route('/registration', 'registration');
+        Router::route('/registration', 'admin/registration');
     }
 
     private function registerUser(): void
@@ -34,7 +34,8 @@ class RegistrationController extends AbstractController
         $this->userModel->create([
             'username' => Request::post('regUsername'),
             'email' => Request::post('regEmail'),
-            'password' => Request::post('regPassword')
+            'password' => Request::post('regPassword'),
+            'status' => 1
         ]);
 
         $this->redirectToPage('/');

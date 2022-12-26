@@ -1,17 +1,18 @@
 <div class="row mt-3 font-color-db">
     <h3 class="col-12 font-fam-13 display-4 text-center mt-5 font-color-db">Panel Administratora</h3>
+    <span class="col-12 text-center font-fam-14 font-color-db">Witaj, jesteś zalogowany jako [%user%].</span>
 </div>
 <div class="row mt-4">
     <div class="col-12">
         <ul class="nav nav-pills nav-i nav-fill">
             <li class="nav-item m-1 panel-button">
-                <a class="nav-link" href="/agd_w_czystym/index.php/admin">Informacja</a>
+                <a class="nav-link [%adminActive%]" href="/agd_w_czystym/index.php/admin">Informacja</a>
             </li>
             <li class="nav-item m-1 panel-button">
-                <a class="nav-link" href="/agd_w_czystym/index.php/account">Konto</a>
+                <a class="nav-link [%accountActive%]" href="/agd_w_czystym/index.php/account">Konto</a>
             </li>
             <li class="nav-item m-1 panel-button">
-                <a class="nav-link" href="/agd_w_czystym/index.php/editor">Edycja strony</a>
+                <a class="nav-link [%editorActive%]" href="/agd_w_czystym/index.php/editor">Edycja strony</a>
             </li>
         </ul>
     </div>
