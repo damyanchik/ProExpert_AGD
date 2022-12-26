@@ -20,6 +20,11 @@ class ContentModel extends AbstractModel implements ModelInterface
     const TEXT = 'text';
     const DATE = 'date';
 
+    const HOME = 1;
+    const ABOUT = 2;
+    const COVERAGE = 3;
+    const CONTACT = 4;
+
     public function create(array $data): void
     {
     }
@@ -42,9 +47,11 @@ class ContentModel extends AbstractModel implements ModelInterface
     {
         $this->editRecord(
             self::NAME,
-            self::COLUMNS,
             [
-                $data['page'],
+                self::TEXT,
+                self::DATE
+            ],
+            [
                 $data['text'],
                 $data['date']
             ],
@@ -59,6 +66,15 @@ class ContentModel extends AbstractModel implements ModelInterface
             self::NAME,
             self::ID,
             $id
+        );
+    }
+
+    public function getByPage(int $pageId): array
+    {
+        return $this->getRecord(
+            self::NAME,
+            self::PAGE,
+            $pageId
         );
     }
 }

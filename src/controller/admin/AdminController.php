@@ -16,9 +16,10 @@ class AdminController extends AbstractController
             '/admin',
             'admin/admin', [
             'panel' => AdditionBuilder::create(
-                'additions\panel',
-                ['panel']
-            )
+                'additions\panel', [
+                'adminActive' => 'active',
+                'user' => $_SESSION['user']
+            ])
         ]);
     }
 }
