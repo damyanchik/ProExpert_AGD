@@ -1,10 +1,30 @@
 <tr>
     <th scope="row">[%id%]</th>
-    <td>[%username%]</td>
+    <td class="mouse-over">[%username%]</td>
     <td>[%email%]</td>
     <td>[%status%]</td>
     <td>[%last_login%]</td>
     <td>[%incorrect_login%]</td>
-    <td><a href="?delId=[%id%]"><img src="../public/images/bin.png" style="width: 1.2rem"></a>
+    <td><a href="?delId=[%id%]"><img src="../public/images/bin.png" style="width: 1.2rem"></a></td>
+    <td><img src="../public/images/arrow-down.png" style="width: 1.2rem; cursor: pointer" id="user[%id%]" onclick="expend([%id%]);"></td>
+</tr>
+<tr id="setting[%id%]" style="display: none">
+    <td colspan="8">
+        <form>
+            <div class="text-center mt-4">
+                <label>Zmień hasło: </label>
+                <input>
+                <label class="ml-5">Zmień e-mail: </label>
+                <input>
+                <label class="ml-5">Ustal status: </label>
+                <small class="ml-1" style="font-size: 10px">Moderator</small>
+                <input type="radio">
+                <small style="font-size: 10px">Admin</small>
+                <input type="radio">
+            </div>
+            <div class="pr-3 mb-5">
+                <button class="site-button float-right">Zapisz</button>
+            </div>
+        </form>
     </td>
 </tr>
