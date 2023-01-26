@@ -47,16 +47,27 @@ class LoginController extends AbstractController
     {
         $userModel = new UserModel();
 
-        $password = $userModel->find(
+        $userData = $userModel->find(
             'username',
             Request::post('username')
         );
 
-        if (
-            $password == null
-            || $password[0]['password'] != md5(Request::post('password'))
-        )
+        if ($userData == null)
             return false;
+
+        if ($userData[0]['password'] != md5(Request::post('password'))) {
+            $userModel->updateSingle(
+                $userData[0]['id'] ,
+                'incorrect_login',
+                date('Y-m-d H:i:s')
+            );
+            return false;
+        }
+
+        $userModel->updateSingle(
+            $userData[0]['id'] ,
+            'last_login',
+            date('Y-m-d H:i:s'));
 
         return true;
     }
