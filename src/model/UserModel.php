@@ -86,4 +86,15 @@ class UserModel extends AbstractModel implements ModelInterface
         );
     }
 
+
+    public function updateSingle(int $id, string $column, string|int $data): void
+    {
+        $this->editRecord(
+            self::NAME,
+            [$column],
+            [$data],
+            self::ID,
+            $id
+        );
+    }
 }

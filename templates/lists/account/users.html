@@ -8,22 +8,19 @@
     <td><a href="?delId=[%id%]"><img src="../public/images/bin.png" style="width: 1.2rem"></a></td>
     <td><img src="../public/images/arrow-down.png" style="width: 1.2rem; cursor: pointer" id="user[%id%]" onclick="expend([%id%]);"></td>
 </tr>
-<tr id="setting[%id%]" style="display: none">
+<tr id="setting[%id%]" style="display: none;">
     <td colspan="8">
-        <form>
+        <form method="post">
             <div class="text-center mt-4">
                 <label>Zmień hasło: </label>
-                <input>
+                <input type="password" name="password" placeholder="Wpisz nowe hasło">
                 <label class="ml-5">Zmień e-mail: </label>
-                <input>
-                <label class="ml-5">Ustal status: </label>
-                <small class="ml-1" style="font-size: 10px">Moderator</small>
-                <input type="radio">
-                <small style="font-size: 10px">Admin</small>
-                <input type="radio">
+                <input type="email" value="[%email%]" name="email">
+                <label class="ml-5">Zmień status: </label>
+                <input type="checkbox" name="status" value="[%status%]">
             </div>
             <div class="pr-3 mb-5">
-                <button class="site-button float-right">Zapisz</button>
+                <button type="submit" class="site-button float-right" name="userId" value="[%id%]">Zapisz</button>
             </div>
         </form>
     </td>
