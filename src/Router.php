@@ -12,8 +12,12 @@ class Router extends AbstractBuilder
     {
         $userUri = filter_var($_SERVER['REQUEST_URI'], FILTER_SANITIZE_URL);
 
-        $path = '/agd_w_czystym/index.php';
-        if ($userUri !== $path . $uri)
+        $path = '/agd_w_czystym/index.php' . $uri;
+
+        if ($mark = strpos($userUri, '?', 1))
+            $userUri = substr($userUri, 0, $mark);
+
+        if ($userUri !== $path)
             return;
 
         $view = AbstractBuilder::fileToString('pages/' . $file);
