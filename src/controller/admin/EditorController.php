@@ -14,19 +14,21 @@ class EditorController extends AbstractController
 {
     protected function render(): void
     {
+        $panel = AdditionBuilder::create(
+            'additions\panel', [
+            'editorActive' => 'active',
+            'user' => $_SESSION['user']
+        ]);
+
         Router::route(
             '/editor',
             'admin/editor', [
-            'panel' => AdditionBuilder::create(
-                'additions\panel', [
-                'editorActive' => 'active',
-                'user' => $_SESSION['user']
-            ]),
-            'list' => $this->contentList()
+            'panel' => $panel,
+            'list' => $this->listContent()
         ]);
     }
 
-    private function contentList(): string
+    private function listContent(): string
     {
         $content = new ContentModel();
         $list = $content->get();

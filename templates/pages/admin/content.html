@@ -1,0 +1,19 @@
+
+<form method="post" class="mt-3">
+
+    <div class="text-right">
+        <span>Ostatnia zmiana: [%date%]</span>
+    </div>
+
+    <textarea name="textEditor">[%text%]</textarea>
+
+    <button type="submit" class="mx-auto site-button btn-block mb-3 mt-3" style="width: 8rem" name="save" value="[%id%]">Zapisz</button>
+    <a style="text-decoration: none" href="/agd_w_czystym/index.php/editor">
+        <button type="button" class="mx-auto site-button btn-block mb-5" style="width: 8rem">Wstecz</button>
+    </a>
+</form>
+
+<script>
+    CKEDITOR.replace( 'textEditor' );
+
+</script>

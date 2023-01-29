@@ -12,11 +12,13 @@ class ContentModel extends AbstractModel implements ModelInterface
     const NAME = 'content';
     const COLUMNS = [
         'page',
+        'description',
         'text',
         'date',
     ];
     const ID = 'id';
     const PAGE = 'page';
+    const DESCRIPTION = 'description';
     const TEXT = 'text';
     const DATE = 'date';
 
