@@ -11,6 +11,8 @@ use App\Src\Router;
 
 class ContentController extends AbstractController
 {
+    protected string $uri = '/content';
+
     protected function render(): void
     {
         $singleContent = $this->getContent(intval(
@@ -20,7 +22,7 @@ class ContentController extends AbstractController
         $this->setText();
 
         Router::route(
-            '/content',
+            $this->uri,
             'admin/content', [
                 'id' => $singleContent['id'],
                 'date' => $singleContent['date'],

@@ -8,9 +8,11 @@ use App\Src\Router;
 
 class ContactController extends AbstractController
 {
+    protected string $uri = '/contact';
+
     protected function render(): void
     {
-        Router::route('/contact', 'contact');
+        Router::route($this->uri, 'contact');
     }
 
 }

@@ -4,11 +4,16 @@ declare(strict_types=1);
 
 namespace App\Src\Controller;
 
+use App\Src\Router;
+
 abstract class AbstractController
 {
+    protected string $uri = '';
+
     public function __construct()
     {
-        $this->render();
+        if (Router::isUrl($this->uri) || $this->uri === '')
+            $this->render();
     }
 
     protected function access(array $status, string $page): void

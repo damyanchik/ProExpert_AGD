@@ -12,6 +12,8 @@ use App\Src\Router;
 
 class EditorController extends AbstractController
 {
+    protected string $uri = '/editor';
+
     protected function render(): void
     {
         $panel = AdditionBuilder::create(
@@ -21,7 +23,7 @@ class EditorController extends AbstractController
         ]);
 
         Router::route(
-            '/editor',
+            $this->uri,
             'admin/editor', [
             'panel' => $panel,
             'list' => $this->listContent()

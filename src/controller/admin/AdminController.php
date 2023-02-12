@@ -10,16 +10,20 @@ use App\Src\Router;
 
 class AdminController extends AbstractController
 {
+    protected string $uri = '/admin';
+
     protected function render(): void
     {
+        $panel = AdditionBuilder::create(
+            'additions\panel', [
+            'adminActive' => 'active',
+            'user' => $_SESSION['user']
+        ]);
+
         Router::route(
-            '/admin',
+            $this->uri,
             'admin/admin', [
-            'panel' => AdditionBuilder::create(
-                'additions\panel', [
-                'adminActive' => 'active',
-                'user' => $_SESSION['user']
-            ])
+            'panel' => $panel
         ]);
     }
 }

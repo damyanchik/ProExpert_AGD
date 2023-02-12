@@ -13,6 +13,7 @@ use App\Src\Controller\AbstractController;
 class RegistrationController extends AbstractController
 {
     protected object $userModel;
+    protected string $uri = '/registration';
 
     public function __construct()
     {
@@ -23,7 +24,7 @@ class RegistrationController extends AbstractController
     protected function render(): void
     {
         $this->registerUser();
-        Router::route('/registration', 'admin/registration');
+        Router::route($this->uri, 'admin/registration');
     }
 
     private function registerUser(): void
@@ -38,7 +39,7 @@ class RegistrationController extends AbstractController
             'status' => 1
         ]);
 
-        $this->redirectToPage('/');
+        $this->redirectToPage('/account');
     }
 
     private function validateRegistration(): bool

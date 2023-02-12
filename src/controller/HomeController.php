@@ -8,9 +8,11 @@ use App\Src\Router;
 
 class HomeController extends AbstractController
 {
+    protected string $uri = '/';
+
     protected function render(): void
     {
-        Router::route('/', 'home');
+        Router::route($this->uri, 'home');
     }
 
 }

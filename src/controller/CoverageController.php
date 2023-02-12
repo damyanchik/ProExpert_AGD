@@ -8,9 +8,10 @@ use App\Src\Router;
 
 class CoverageController extends AbstractController
 {
+    protected string $uri = '/coverage';
+
     protected function render(): void
     {
-        Router::route('/coverage', 'coverage');
+        Router::route($this->uri, 'coverage');
     }
-
 }

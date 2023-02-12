@@ -14,6 +14,8 @@ use App\Src\Router;
 
 class AccountController extends AbstractController
 {
+    protected string $uri = '/account';
+
     protected function render(): void
     {
         $panel = AdditionBuilder::create(
@@ -28,7 +30,7 @@ class AccountController extends AbstractController
         $this->userList();
 
         Router::route(
-            '/account',
+            $this->uri,
             'admin/account', [
                 'panel' => $panel,
                 'list' => $this->userList()
