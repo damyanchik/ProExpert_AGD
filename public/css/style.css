@@ -23,6 +23,14 @@
     color: #2C2D40 !important;
 }
 
+.icon {
+    transition: transform 0.2s ease-in-out;
+}
+
+.icon:hover {
+    transform: scale(1.2);
+}
+
 .logo {
     background-image: url("../images/logo.png");
     background-size: cover;

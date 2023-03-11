@@ -5,10 +5,10 @@
     <td>[%status%]</td>
     <td>[%last_login%]</td>
     <td>[%incorrect_login%]</td>
-    <td><a href="?delId=[%id%]"><img src="../public/images/bin.png" style="width: 1.2rem"></a></td>
-    <td><img src="../public/images/arrow-down.png" style="width: 1.2rem; cursor: pointer" id="user[%id%]" onclick="expend([%id%]);"></td>
+    <td><a href="?delId=[%id%]"><img class="icon" src="../public/images/bin.png" style="width: 1.2rem"></a></td>
+    <td><img class="icon" src="../public/images/arrow-down.png" style="width: 1.2rem; cursor: pointer" id="user[%id%]" onclick="expendField([%id%]);"></td>
 </tr>
-<tr id="setting[%id%]" style="display: none;">
+<tr id="setting[%id%]" class="userField" style="display: none;">
     <td colspan="8">
         <form method="post">
             <div class="text-center mt-4">
