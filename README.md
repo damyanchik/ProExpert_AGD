@@ -6,6 +6,7 @@ Projekt is a website for a service offering repair of household appliances. The 
 
 ## About the Project
 Like I said, I wanted to write something again without any framework. I wanted to create a project with more experience. At this stage in my development journey, I am mainly focused on the backend. Nevertheless, I tried to create a simple, though very aesthetic appearance of the site. I created a responsive website using Bootstrap. I used ready-made JavaScript scripts for editing content (CKEditor) or slider on the home page. I made sure the admin panel was transparent.
+
 In a project focused on the backend, I created a project from scratch based on the MVC architectural pattern and object-oriented paradigm. Every language is separate. The Frontend is not mixed with the backend. I created something like my own mini-framework. In the project, In the project I tried to pay a lot of attention to the best quality of written code and narrow specialization of classes. 
 
 ## Structure and features
