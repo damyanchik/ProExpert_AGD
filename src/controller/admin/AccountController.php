@@ -9,6 +9,7 @@ use App\Src\Builder\ListBuilder;
 use App\Src\Controller\AbstractController;
 use App\Src\Helper\Request;
 use App\Src\Helper\Validation;
+use App\Src\Helper\Sort;
 use App\Src\Model\UserModel;
 use App\Src\Router;
 
@@ -18,6 +19,8 @@ class AccountController extends AbstractController
 
     protected function render(): void
     {
+        $this->access(['admin'], '/login');
+
         $panel = AdditionBuilder::create(
             'additions\panel', [
             'accountActive' => 'active',
@@ -27,7 +30,6 @@ class AccountController extends AbstractController
         $this->setEmail();
         $this->setPassword();
         $this->setStatus();
-        $this->userList();
 
         Router::route(
             $this->uri,
@@ -44,12 +46,15 @@ class AccountController extends AbstractController
         $user = new UserModel();
         $list = $user->get();
 
-        $list = ListBuilder::modify(
+        ListBuilder::modify(
             $list,
             ['status', 'status'],
             ['moderator', 'administrator'],
             ['moderator' => 1, 'administrator' => '-1']
         );
+
+        if (Request::isGet('column'))
+            Sort::sortArray($list, Request::get('column'), Request::get('order'));
 
         return ListBuilder::create('lists\account\users', $list);
     }

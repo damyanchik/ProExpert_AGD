@@ -37,7 +37,7 @@ class EditorController extends AbstractController
         $content = new ContentModel();
         $list = $content->get();
 
-        $list = ListBuilder::modify(
+        ListBuilder::modify(
             $list,
             ['page', 'page', 'page', 'page'],
             ['HOME', 'ABOUT', 'COVERAGE', 'CONTACT'],

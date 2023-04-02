@@ -24,7 +24,7 @@ class ListBuilder extends AbstractBuilder implements BuilderInterface
         return $view;
     }
 
-    public static function modify(array $list, array $keys, array $values, array $conditions = null): array
+    public static function modify(array &$list, array $keys, array $values, array $conditions = null): array
     {
         for ($n = 0; $n < count($keys); $n++) {
             for ($i = 0; $i < count($list); $i++) {
