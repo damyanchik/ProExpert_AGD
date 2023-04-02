@@ -23,6 +23,8 @@ class RegistrationController extends AbstractController
 
     protected function render(): void
     {
+        $this->access(['admin'], '/login');
+
         $this->registerUser();
         Router::route($this->uri, 'admin/registration');
     }

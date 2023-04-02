@@ -14,6 +14,8 @@ class AdminController extends AbstractController
 
     protected function render(): void
     {
+        $this->access(['admin', 'moderator'], '/login');
+
         $panel = AdditionBuilder::create(
             'additions\panel', [
             'adminActive' => 'active',

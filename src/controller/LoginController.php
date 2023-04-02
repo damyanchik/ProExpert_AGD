@@ -11,9 +11,13 @@ use App\Src\Router;
 
 class LoginController extends AbstractController
 {
-
     protected function render(): void
     {
+        if (!empty($_SESSION['status']) && Router::isUrl('/login')) {
+            $this->redirectToPage('/admin');
+            return;
+        }
+
         $this->loginUser();
         $this->logoutUser();
         Router::route('/login', 'login');
@@ -21,13 +25,16 @@ class LoginController extends AbstractController
 
     private function loginUser(): void
     {
-        if (
-            !self::validateLogin()
-            || !self::dataVerification()
-        )
+        if (!self::validateLogin())
             return;
 
+        if (!self::dataVerification())
+            return;
+        else
+            $status = self::dataVerification();
+
         $_SESSION['user'] = Request::post('username');
+        $this->setStatus($status);
         $this->redirectToPage('/admin');
     }
 
@@ -43,7 +50,7 @@ class LoginController extends AbstractController
         $this->redirectToPage('/');
     }
 
-    private function dataVerification(): bool
+    private function dataVerification(): null|int
     {
         $userModel = new UserModel();
 
@@ -52,8 +59,8 @@ class LoginController extends AbstractController
             Request::post('username')
         );
 
-        if ($userData == null)
-            return false;
+        if (!$userData)
+            return null;
 
         if ($userData[0]['password'] != md5(Request::post('password'))) {
             $userModel->updateSingle(
@@ -61,7 +68,7 @@ class LoginController extends AbstractController
                 'incorrect_login',
                 date('Y-m-d H:i:s')
             );
-            return false;
+            return null;
         }
 
         $userModel->updateSingle(
@@ -69,7 +76,7 @@ class LoginController extends AbstractController
             'last_login',
             date('Y-m-d H:i:s'));
 
-        return true;
+        return $userData[0]['status'];
     }
 
     private function validateLogin(): bool
@@ -85,5 +92,15 @@ class LoginController extends AbstractController
             return false;
 
         return true;
+    }
+
+    private function setStatus($status): void
+    {
+        if ($status == '-1')
+            $_SESSION['status'] = 'admin';
+        elseif ($status == '1')
+            $_SESSION['status'] = 'moderator';
+        else
+            return;
     }
 }

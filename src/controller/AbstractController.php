@@ -21,6 +21,9 @@ abstract class AbstractController
         if (in_array($_SESSION['status'], $status))
             return;
 
+        if ($_SESSION['status'])
+            $this->redirectToPage('/admin');
+
         $this->redirectToPage($page);
     }
 

@@ -15,6 +15,8 @@ class ContentController extends AbstractController
 
     protected function render(): void
     {
+        $this->access(['admin', 'moderator'], '/login');
+
         $singleContent = $this->getContent(intval(
             Request::get('edited')
         ));

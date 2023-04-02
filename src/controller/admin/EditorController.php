@@ -16,6 +16,8 @@ class EditorController extends AbstractController
 
     protected function render(): void
     {
+        $this->access(['admin', 'moderator'], '/login');
+
         $panel = AdditionBuilder::create(
             'additions\panel', [
             'editorActive' => 'active',
