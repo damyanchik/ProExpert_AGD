@@ -25,6 +25,7 @@
 
 .icon {
     transition: transform 0.2s ease-in-out;
+    cursor: pointer;
 }
 
 .icon:hover {
@@ -36,6 +37,7 @@
     background-size: cover;
     width: 19em;
     height: 4rem;
+    margin: 0.5rem 1rem 1rem 1rem;
 }
 
 .nav-button-active {
@@ -43,7 +45,7 @@
 }
 
 .nav-button:hover {
-    text-decoration: underline 2px #2C2D40 !important;
+    color: #2C2D40 !important;
 }
 
 .l-win {
@@ -51,6 +53,57 @@
 }
 
 /* HOME TEMPLATE */
+
+.arrow {
+    width: 0;
+    height: 0;
+    margin: 0 auto;
+    border-top: 40px solid green;
+    border-left: 40px solid transparent;
+    border-right: 40px solid transparent;
+}
+
+.repair-icon-list {
+    list-style-image: url("../images/repair-icon.png");
+    margin-top: 1.5rem;
+    margin-left: 1.8rem;
+    line-height: 2.5rem;
+}
+
+.fixly {
+    background-color: rgb(251, 207, 40);
+    width: 20px;
+    height: 20px;
+    border: rgb(251, 207, 40);
+    border-radius: 50%;
+    color: gray;
+    font-size: 13px;
+    text-align: center;
+    font-weight: bold;
+    margin: 0;
+}
+
+.wallpaper {
+    background-color: #2C2D40;
+    background-image: linear-gradient(287deg, #2C2D40 0%, rgba(45, 41, 86, 1) 100%);
+}
+
+.red-button2 {
+    font-size: 23px;
+    padding: 0.4rem 1.4rem 0.4rem 1.4rem;
+    text-decoration: none;
+    font-family: '12', Arial, sans-serif;
+    color: #F2F1E9;
+    border: solid 1px #A6524B;
+    border-radius: 25px;
+    background: #A6524B;
+    background-size: 300%;
+    transition: .3s ease-out;
+}
+
+a:hover {
+    text-decoration: none !important;
+}
 
 .red-button {
     text-decoration: none;
@@ -69,7 +122,6 @@
     border: solid 1px;
     color: #A6524B;
     border-radius: 15px;
-    border: solid #A6524B;
     background-color: #F2F1E9;
 }
 
@@ -129,21 +181,77 @@
     line-height: 2.1rem !important;
 }
 
-.fixly-link {
-    color: #2C2D40 !important;
+.brandSlider {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-/* COVERAGE TEMPLATE */
+.brandSlider img {
+    width: 6rem;
+    margin: 0 auto;
+    vertical-align: middle;
+}
+
+.brandSlider .slick-arrow, .opinionSlider .slick-arrow {
+    display: none !important;
+}
+
+.background-stuff {
+    padding: 1.5rem;
+    border-radius: 30%;
+    width: 50%;
+}
+
+.background-stuff img {
+    width: 100%;
+}
+
+.first-home h2 {
+    line-height: 38px;
+}
+
+    /* COVERAGE TEMPLATE */
 
 .googlemap {
     width: 100%;
+}
+
+.advantages img {
+    width: 5rem;
+    margin-bottom: 1rem;
+}
+
+.advantages span {
+    display: block;
+}
+
+.advantages div {
+    text-align: center;
+    font-family: '14', Tahoma, sans-serif;
 }
 
 /* CONTACT TEMPLATE */
 
 .contact-details li {
     list-style: none;
-    line-height: 1.8rem;
+    line-height: 2.2rem;
+}
+
+.contact-details li:nth-child(2) {
+    list-style-image: url("../images/contact/time.png");
+}
+
+.contact-details li:nth-child(3) {
+    list-style-image: url("../images/contact/calendar.png");
+}
+
+.contact-details li:nth-child(4) {
+    list-style-image: url("../images/contact/phone.png");
+}
+
+.contact-details li:nth-child(5) {
+    list-style-image: url("../images/contact/email.png");
 }
 
 /* PANEL TEMPLATE */
@@ -212,6 +320,7 @@
     animation: transitionIn .50s;
 }
 
+
 @keyframes transitionIn {
     from {
         opacity: 0;
@@ -230,7 +339,7 @@
     }
 }
 
-@media (max-width: 540px) {
+@media (max-width: 800px) {
     .logo {
         width: 15rem;
         height: 2.5rem;
@@ -276,5 +385,23 @@
 
     .copyright {
         font-size: 8px !important;
+    }
+
+    .first-home h1 {
+        font-size: 30px; !important;
+    }
+
+    .first-home h2 {
+        font-size: 15px; !important;
+        line-height: 1.2rem; !important;
+    }
+
+    .red-button2 {
+        font-size: 15px;
+        padding: 0.4rem 1.2rem 0.4rem 1.2rem;
+    }
+
+    .first-home div {
+        box-sizing: unset; !important;
     }
 }

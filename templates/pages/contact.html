@@ -1,45 +1,47 @@
-<div class="row mt-4 mt-md-5 font-color-db">
-    <div class="col-12 mt-md-5">
-        <h2 class="col-12 font-fam-13 display-4 text-center title-size">Skontaktuj się z nami!</h2>
-    </div>
-</div>
-<div class="row my-5 mt-md-5">
-    <div class="col-12 col-md-6">
-        <ul class="font-fam-14 contact-details py-md-4 mb-md-5 font-color-db description-size">
-            <li class="h2 py-2">Dane kontaktowe:</li>
-            <li>Pracujemy od 8:00 do 16:00</li>
-            <li>Od poniedziałku do piątku</li>
-            <li>Tel: (+48) 666-357-653</li>
-            <li>E-mail: agd.naprawa.serwis@gmail.com</li>
-        </ul>
-    </div>
-    <div class="col-12 col-md-6 font-color-db" style="display: none">
-        <div class="text-center mb-4">
-            <span class="font-fam-14 mb-2 h5">Możesz zgłosić się do nas przez formularz!</span>
+<div class="container">
+    <div class="row mt-4 mt-md-5 font-color-db">
+        <div class="col-12 mt-md-5">
+            <h2 class="col-12 font-fam-13 display-4 text-center title-size">Skontaktuj się z nami!</h2>
         </div>
-        <form class="font-fam-14">
-            <div class="form-group">
-                <label for="exampleFormControlInput2" class="ml-1">Imię</label>
-                <input type="text" class="form-control" id="exampleFormControlInput2">
-            </div>
-            <div class="form-group">
-                <label for="exampleFormControlInput1" class="ml-1">Adres email</label>
-                <input type="email" class="form-control" id="exampleFormControlInput1">
-            </div>
-            <div class="form-group">
-                <label for="exampleFormControlInput3" class="ml-1">Numer kontaktowy</label>
-                <input type="tel" class="form-control" id="exampleFormControlInput3">
-            </div>
-            <div class="form-group">
-                <label for="exampleFormControlTextarea1" class="ml-1">Treść zgłoszenia</label>
-                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-            </div>
-            <button type="button" class="float-right mr-3 site-button h5">Wyślij</button>
-        </form>
     </div>
-</div>
-<div class="row mt-5 font-color-db">
-    <div class="col-12 font-fam-13 text-right">
-        <span class="h3">Czekamy na kontakt!</span>
+    <div class="row my-5 mt-md-5">
+        <div class="col-12 col-md-6">
+            <ul class="font-fam-14 contact-details py-md-4 mb-md-5 font-color-db description-size">
+                <li class="h2 py-2">Dane kontaktowe:</li>
+                <li>od 8:00 do 16:00</li>
+                <li>Od poniedziałku do piątku</li>
+                <li>(+48) 666-357-653</li>
+                <li>agd.naprawa.serwis@gmail.com</li>
+            </ul>
+        </div>
+        <div class="col-12 col-md-6 font-color-db">
+            <div class="text-center mb-4">
+                <span class="font-fam-14 mb-2 h5">Możesz zgłosić się do nas przez formularz!</span>
+            </div>
+            <form method="post" class="font-fam-14">
+                <div class="form-group">
+                    <label for="name" class="ml-1">Imię</label>
+                    <input type="text" class="form-control" id="name" name="name">
+                </div>
+                <div class="form-group">
+                    <label for="email" class="ml-1">Adres email</label>
+                    <input type="email" class="form-control" id="email" name="email">
+                </div>
+                <div class="form-group">
+                    <label for="tel" class="ml-1">Numer kontaktowy</label>
+                    <input type="tel" class="form-control" id="tel" name="tel">
+                </div>
+                <div class="form-group">
+                    <label for="message" class="ml-1">Treść zgłoszenia</label>
+                    <textarea class="form-control" id="message" rows="3" name="message"></textarea>
+                </div>
+                <button type="submit" class="float-right mr-3 site-button h5" name="submit">Wyślij zgłoszenie</button>
+            </form>
+        </div>
+    </div>
+    <div class="row mt-5 font-color-db">
+        <div class="col-12 font-fam-13 text-right">
+            <span class="h3">Czekamy na kontakt!</span>
+        </div>
     </div>
 </div>

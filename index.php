@@ -20,6 +20,7 @@ use App\Src\Controller\Admin\AccountController;
 use App\Src\Controller\Admin\AdminController;
 use App\Src\Controller\Admin\EditorController;
 use App\Src\Controller\Admin\RegistrationController;
+use App\Src\Controller\Admin\ContentController;
 
 session_start();
 
@@ -33,3 +34,4 @@ $account = new AccountController();
 $admin = new AdminController();
 $editor = new EditorController();
 $registration = new RegistrationController();
+$content = new ContentController();
